@@ -3,9 +3,9 @@ const candyProducts = [
     price: 25.5,
     name: "Frugt Vingummibamser",
     country: "Germany",
-    weight: 250, // Vægt i gram
+    weight: 250, // weight in grams
     color: ["Red", "Green", "Yellow", "Orange"],
-    discount: 0, // Procent rabat
+    discount: 0, // discount in percent
     brand: "Haribo",
     category: "Vingummi",
     allergies: ["None"],
@@ -17,7 +17,7 @@ const candyProducts = [
     country: "Switzerland",
     weight: 100,
     color: ["Brown"],
-    discount: 15, // 15% rabat
+    discount: 15, // 15% discount
     brand: "Lindt",
     category: "Chokolade",
     allergies: ["Mælk", "Nødder", "Soja"],
@@ -61,5 +61,4 @@ const candyProducts = [
   },
 ];
 
-// Eksempel på at printe data ud i konsollen:
 console.log(candyProducts);
