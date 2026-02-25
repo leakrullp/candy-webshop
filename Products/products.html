@@ -3,9 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Products</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="products.js"></script>
 </head>
+
+
 <body>
+  <div id="navbar"></div>
+  <div id="products-container"></div>
+
+<script>
+  var card = document.getElementById("products-container");
+
+  candyProducts.forEach(function(p) {
+    card.innerHTML += '<div class="product-card">' + '<h2>' + p.name + '</h2>' + '<img src="' + p.image + '" width="200">' + '<p>Price: ' + p.price +'<p>Country: ' + p.country + '</p>' + '<p>Brand: ' + p.brand + '</p>' + '<button onclick="viewProducts(' + p.id + ')">View Details</button>' + '<button>Add to Cart</button>' + '</div>';
+  })
+
+  function viewProducts(id) {
+    localStorage.setItem("selectedProductId", id); // Store the selected product ID in localStorage
+    window.location.href = "productDetails.html";
+  }
   
+</script>
+<script src="../navbar.js"></script>
 </body>
 </html>
