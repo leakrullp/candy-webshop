@@ -1,7 +1,13 @@
 var navbar = document.getElementById("navbar");
 
-navbar.innerHTML =
-  '<a href="../index.html">Home</a>' +
-  '<a href="../Products/products.html">Products</a>' +
-  '<a href="../login.html">Login</a>' +
-  '<a href="#">Cart</a>';
+const user = localStorage.getItem("fname")
+let userId = user ? user.slice(0, 2).toUpperCase() : "Login";
+let logClass = user ? "profText" : "";
+
+
+navbar.innerHTML = `
+  <a href="../index.html">Home</a>
+  <a href="../Products/products.html">Products</a>
+  <a class="${logClass}" href="../login.html">${userId}</a>
+  <a href="#">Cart</a>
+`;

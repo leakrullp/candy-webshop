@@ -235,3 +235,11 @@ body {
     max-width: 500px;
   }
 }
+
+.profText {
+    background-color: #b8a25f!important;
+    border-radius: 50%;
+    padding: 2px 5px;
+    color: #ffffff !important;
+
+}
