@@ -3,13 +3,7 @@
 * {
     font-family: 'Funnel Sans', sans-serif;
 }
-/* Globe spinning in navbar */
-.spinning-globe {
-  display: inline-block;
-  animation: flip 4s infinite linear;
-  color: green;
-  margin-right: 8px;
-}
+
 
 @keyframes flip {
   0% {
