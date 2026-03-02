@@ -245,7 +245,14 @@ body {
 }
 
 #welcome-header{
-    background-color: #fdfbfb !important;
     color: #b8a25f !important;
     
+}
+
+.btn-primary{
+    background-color: #b8a25f !important;
+}
+
+.btn-secondary{
+    background-color: #777 !important;
 }
