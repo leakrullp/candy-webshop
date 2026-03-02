@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="navbar"></div>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="container" style="margin:5px">
+                <h3>Please login to your account</h3>
+                <form action="index.html">
+                    <label for="fname">First name:</label><br />
+                    <input class="form-control" type="text" id="fname" name="fname" value="" /><br />
+                    <label for="lname">Last name:</label><br />
+                    <input class="form-control" type="text" id="lname" name="lname" value="" /><br /><br />
+                    <input type="submit" class="btn btn-primary" onclick="onLogin(event)" value="Login" />
+                    <input type="button" class="btn btn-secondary" onclick="location.href='register.html';"
+                        value="Register account" />
+                    <input type="button" class="btn btn-secondary" value="Cancel" onclick="history.back(-1)" />
+            </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="col-sm-4"></div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        function onLogin() {
+            event.preventDefault();
+
+            if (checkIfUserExists()) {
+                // user exists → go to index
+                window.location.href = "index.html";
+            } else {
+                // user NOT registered → redirect
+                window.location.href = "register.html";
+            }
+        }
+        function checkIfUserExists() {
+            const inputFname = document.getElementById("fname").value;
+            const inputLname = document.getElementById("lname").value;
+
+            const storedFname = localStorage.getItem("fname");
+            const storedLname = localStorage.getItem("lname");
+
+            return inputFname === storedFname && inputLname === storedLname;
+        }
+    </script>
+
+    <script src="../navbar.js"></script>
+</body>
+
+</html>
