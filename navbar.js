@@ -9,5 +9,5 @@ navbar.innerHTML = `
   <a href="../index.html">Home</a>
   <a href="../Products/products.html">Products</a>
   <a class="${logClass}" href="../login.html">${userId}</a>
-  <a href="#">Cart</a>
+  <a href="../basket.html">Cart</a>
 `;
