@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,19 +14,24 @@
   <div id="navbar"></div>
   <div id="products-container"></div>
 
-<script>
-  var card = document.getElementById("products-container");
+  <script type="module">
+    import { ProductCard } from "./productCard.js";
+    import { candyProducts } from "./products.js";
 
-  candyProducts.forEach(function(p) {
-    card.innerHTML += '<div class="product-card">' + '<h2>' + p.name + '</h2>' + '<img src="' + p.image + '" width="200">' + '<p>Price: ' + p.price +'<p>Country: ' + p.country + '</p>' + '<p>Brand: ' + p.brand + '</p>' + '<button onclick="viewProducts(' + p.id + ')">View Details</button>' + '<button>Add to Cart</button>' + '</div>';
-  })
+    var container = document.getElementById("products-container");
 
-  function viewProducts(id) {
-    localStorage.setItem("selectedProductId", id); // Store the selected product ID in localStorage
-    window.location.href = "productDetails.html";
-  }
-  
-</script>
-<script src="../navbar.js"></script>
+    candyProducts.forEach(p => {
+      const cardElement = ProductCard(p);
+      container.appendChild(cardElement);
+    });
+
+    function viewProducts(id) {
+      localStorage.setItem("selectedProductId", id); // Store the selected product ID in localStorage
+      window.location.href = "productDetails.html";
+    }
+
+  </script>
+  <script src="../navbar.js"></script>
 </body>
+
 </html>

@@ -5,7 +5,8 @@ const candyProducts = [
     name: "Frugt Vingummibamser",
     image: "./images/1.jpg",
     country: "Germany",
-    description: "The original classic gummy bears from Haribo. A colorful mix of fruity flavors including strawberry, lemon, and pineapple. Chewy, sweet, and loved by kids and adults alike since 1922.",
+    description:
+      "The original classic gummy bears from Haribo. A colorful mix of fruity flavors including strawberry, lemon, and pineapple. Chewy, sweet, and loved by kids and adults alike since 1922.",
     weight: 250, // weight in grams
     color: ["Red", "Green", "Yellow", "Orange"],
     discount: 0, // discount in percent
@@ -20,7 +21,8 @@ const candyProducts = [
     name: "Cremet Mælkechokolade",
     image: "./images/2.jpg",
     country: "Switzerland",
-    description:"Experience the smooth, melting sensation of premium Swiss milk chocolate. Crafted by Lindt's Master Chocolatiers, this bar offers a rich, velvety texture and a perfectly balanced cocoa sweetness.",
+    description:
+      "Experience the smooth, melting sensation of premium Swiss milk chocolate. Crafted by Lindt's Master Chocolatiers, this bar offers a rich, velvety texture and a perfectly balanced cocoa sweetness.",
     weight: 100,
     color: ["Brown"],
     discount: 15, // 15% discount
@@ -35,7 +37,8 @@ const candyProducts = [
     name: "Sure Jordbær Snører",
     image: "./images/3.jpg",
     country: "Denmark",
-    description: "These sour strawberry licorice ropes from Malaco are a tangy treat for those who love a bit of zing. Each bite delivers a burst of sweet and sour strawberry flavor, making them a favorite among candy enthusiasts.",
+    description:
+      "These sour strawberry licorice ropes from Malaco are a tangy treat for those who love a bit of zing. Each bite delivers a burst of sweet and sour strawberry flavor, making them a favorite among candy enthusiasts.",
     weight: 120,
     color: ["Red"],
     discount: 0,
@@ -50,7 +53,8 @@ const candyProducts = [
     name: "Salte Heksehyl",
     image: "./images/4.jpg",
     country: "Netherlands",
-    description: "Toms' Salty Heksehyl is a unique blend of salty and sweet flavors. These licorice pieces are coated with a layer of salt, creating a delicious contrast to the rich, chewy licorice inside. Perfect for those who enjoy a bold taste experience.",
+    description:
+      "Toms' Salty Heksehyl is a unique blend of salty and sweet flavors. These licorice pieces are coated with a layer of salt, creating a delicious contrast to the rich, chewy licorice inside. Perfect for those who enjoy a bold taste experience.",
     weight: 200,
     color: ["Black", "White"],
     discount: 5,
@@ -65,7 +69,8 @@ const candyProducts = [
     name: "Klassiske Bolcher",
     image: "./images/5.jpg",
     country: "Denmark",
-    description: "These classic Danish bolcher are a beloved treat with their distinctive pink and white striped appearance. Each bolcher is made with high-quality ingredients and offers a perfect balance of sweetness and texture.",
+    description:
+      "These classic Danish bolcher are a beloved treat with their distinctive pink and white striped appearance. Each bolcher is made with high-quality ingredients and offers a perfect balance of sweetness and texture.",
     weight: 150,
     color: ["Pink", "White"],
     discount: 0,
@@ -76,4 +81,4 @@ const candyProducts = [
   },
 ];
 
-console.log(candyProducts);
+export { candyProducts };
