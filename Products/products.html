@@ -6,24 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products</title>
   <link rel="stylesheet" href="../styles.css">
-  <script src="products.js"></script>
 </head>
-
 
 <body>
   <div id="navbar"></div>
   <div id="products-container"></div>
 
   <script type="module">
-    import { ProductCard } from "./productCard.js";
-    import { candyProducts } from "./products.js";
+    import { createProductCard } from "./productCard.js";
+    import { candyProducts, renderProducts } from "./products.js";
 
-    var container = document.getElementById("products-container");
-
-    candyProducts.forEach(p => {
-      const cardElement = ProductCard(p);
-      container.appendChild(cardElement);
-    });
+    renderProducts("products-container", candyProducts);
 
     function viewProducts(id) {
       localStorage.setItem("selectedProductId", id); // Store the selected product ID in localStorage

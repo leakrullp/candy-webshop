@@ -1,4 +1,6 @@
-const candyProducts = [
+import { createProductCard } from "./productCard.js";
+
+export const candyProducts = [
   {
     id: 1,
     price: 25.5,
@@ -81,4 +83,25 @@ const candyProducts = [
   },
 ];
 
-export { candyProducts };
+export function filterProducts(products, filterFn) {
+  return products.filter(filterFn);
+}
+
+export function renderProducts(containerId, products) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+
+  products.forEach((product) => {
+    const card = createProductCard(product);
+    container.appendChild(card);
+  });
+
+  // Add event listeners for "View Details" buttons
+  container.querySelectorAll(".view-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      localStorage.setItem("selectedProductId", id);
+      window.location.href = "productDetails.html";
+    });
+  });
+}

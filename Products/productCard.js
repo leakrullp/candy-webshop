@@ -1,7 +1,4 @@
-// productCard.js
-
-// Returns a DOM element for a single product card
-export function ProductCard(p) {
+export function createProductCard(p) {
   const card = document.createElement("div");
   card.classList.add("product-card");
 
