@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 * {
-    font-family: 'Funnel Sans', sans-serif;
+  font-family: "Funnel Sans", sans-serif;
 }
-
 
 @keyframes flip {
   0% {
@@ -215,6 +214,58 @@ body {
   cursor: pointer;
 }
 
+.product-banner {
+  position: relative;
+  margin: 3rem auto;
+  max-width: 1200px;
+}
+
+.product-banner-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.product-banner-track-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.product-banner-track {
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.4s ease;
+}
+
+.banner-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.banner-arrow:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.banner-arrow.left {
+  left: -20px;
+}
+
+.banner-arrow.right {
+  right: -20px;
+}
+
 /* Media queries */
 @media (min-width: 600px) {
   #products-container {
@@ -236,23 +287,20 @@ body {
 }
 
 .profText {
-    background-color: #b8a25f!important;
-    border-radius: 50%;
-    padding: 2px 5px;
-    color: #ffffff !important;
-
+  background-color: #b8a25f !important;
+  border-radius: 50%;
+  padding: 2px 5px;
+  color: #ffffff !important;
 }
 
-#welcome-header{
-    color: #b8a25f !important;
-    
+#welcome-header {
+  color: #b8a25f !important;
 }
 
-.btn-primary{
-    background-color: #b8a25f !important;
+.btn-primary {
+  background-color: #b8a25f !important;
 }
 
-.btn-secondary{
-    background-color: #777 !important;
+.btn-secondary {
+  background-color: #777 !important;
 }
-

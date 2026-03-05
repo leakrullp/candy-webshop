@@ -14,9 +14,9 @@
 
   <script type="module">
     import { createProductCard } from "./productCard.js";
-    import { candyProducts, renderProducts } from "./products.js";
+    import { candyProducts, renderProductGrid } from "./products.js";
 
-    renderProducts("products-container", candyProducts);
+    renderProductGrid("products-container", candyProducts);
 
     function viewProducts(id) {
       localStorage.setItem("selectedProductId", id); // Store the selected product ID in localStorage

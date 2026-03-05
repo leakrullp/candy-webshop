@@ -5,7 +5,7 @@ export const candyProducts = [
     id: 1,
     price: 25.5,
     name: "Frugt Vingummibamser",
-    image: "./images/1.jpg",
+    image: "/Products/images/1.jpg",
     country: "Germany",
     description:
       "The original classic gummy bears from Haribo. A colorful mix of fruity flavors including strawberry, lemon, and pineapple. Chewy, sweet, and loved by kids and adults alike since 1922.",
@@ -21,7 +21,7 @@ export const candyProducts = [
     id: 2,
     price: 45.0,
     name: "Cremet Mælkechokolade",
-    image: "./images/2.jpg",
+    image: "/Products/images/2.jpg",
     country: "Switzerland",
     description:
       "Experience the smooth, melting sensation of premium Swiss milk chocolate. Crafted by Lindt's Master Chocolatiers, this bar offers a rich, velvety texture and a perfectly balanced cocoa sweetness.",
@@ -37,7 +37,7 @@ export const candyProducts = [
     id: 3,
     price: 18.0,
     name: "Sure Jordbær Snører",
-    image: "./images/3.jpg",
+    image: "/Products/images/3.jpg",
     country: "Denmark",
     description:
       "These sour strawberry licorice ropes from Malaco are a tangy treat for those who love a bit of zing. Each bite delivers a burst of sweet and sour strawberry flavor, making them a favorite among candy enthusiasts.",
@@ -53,7 +53,7 @@ export const candyProducts = [
     id: 4,
     price: 32.0,
     name: "Salte Heksehyl",
-    image: "./images/4.jpg",
+    image: "/Products/images/4.jpg",
     country: "Netherlands",
     description:
       "Toms' Salty Heksehyl is a unique blend of salty and sweet flavors. These licorice pieces are coated with a layer of salt, creating a delicious contrast to the rich, chewy licorice inside. Perfect for those who enjoy a bold taste experience.",
@@ -69,7 +69,7 @@ export const candyProducts = [
     id: 5,
     price: 15.0,
     name: "Klassiske Bolcher",
-    image: "./images/5.jpg",
+    image: "/Products/images/5.jpg",
     country: "Denmark",
     description:
       "These classic Danish bolcher are a beloved treat with their distinctive pink and white striped appearance. Each bolcher is made with high-quality ingredients and offers a perfect balance of sweetness and texture.",
@@ -87,7 +87,7 @@ export function filterProducts(products, filterFn) {
   return products.filter(filterFn);
 }
 
-export function renderProducts(containerId, products) {
+export function renderProductGrid(containerId, products) {
   const container = document.getElementById(containerId);
   container.innerHTML = "";
 
