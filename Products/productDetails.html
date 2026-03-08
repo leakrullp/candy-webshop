@@ -28,7 +28,7 @@
   </div>
 
   <script>
-    var selectedProductId = localStorage.getItem("selectedProductId"); // Retrieve the selected product ID from localStorage
+    var selectedProductId = parseInt(localStorage.getItem("selectedProductId")); // Retrieve the selected product ID from localStorage
     var product = document.getElementById("full-container");
 
     candyProducts.forEach(function(p) {
