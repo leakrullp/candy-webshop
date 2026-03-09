@@ -22,11 +22,11 @@ body {
 }
 
 /* Cart counter */
-.cart-link{
+.cart-link {
   position: relative;
 }
 
-.cart-count{
+.cart-count {
   background: red;
   color: white;
   font-size: 12px;
@@ -264,6 +264,7 @@ body {
 
 .banner-arrow.right {
   right: -20px;
+}
 /* Basket Page */
 
 #basket-page-title {
@@ -298,9 +299,9 @@ body {
 }
 
 .basket-img {
-  width: 120px;       
-  height: 120px;      
-  object-fit: cover;  
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
   border-radius: 12px;
 }
 
@@ -317,8 +318,8 @@ body {
 }
 
 .remove-btn:hover {
-    background: var(--beige);
-    color: white;
+  background: var(--beige);
+  color: white;
 }
 
 /* Media queries */
