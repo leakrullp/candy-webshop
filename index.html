@@ -84,8 +84,8 @@
                 </div>
             </div>
         </section>
-        <div id="gummy-banner"></div>
-        <div id="denmark-banner"></div>
+        <div id="banner-1"></div>
+        <div id="banner-2"></div>
     </main>
 
     <script src="../navbar.js"></script>
@@ -97,11 +97,11 @@
         import { candyProducts } from "./Products/products.js";
         import { ProductBanner } from "./Products/productBanner.js";
 
-        ProductBanner("gummy-banner", "Gummy candy", candyProducts,
-            p => p.category === "Vingummi"
-        );
-        ProductBanner("denmark-banner", "Danish candy", candyProducts,
+        ProductBanner("banner-1", "Danish products", candyProducts,
             p => p.country === "Denmark"
+        );
+        ProductBanner("banner-2", "All products (no filter)", candyProducts,
+            // p => p.country === "Denmark"
         );
 
     </script>
