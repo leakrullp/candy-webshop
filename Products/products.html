@@ -23,8 +23,17 @@
       window.location.href = "productDetails.html";
     }
 
+    function addToCart(id) {
+      let productsInCart = JSON.parse(localStorage.getItem("productsInCart")) || []; // Call the existing cart array from localStorage or create an empty array if it doesn't exist
+      productsInCart.push(id); // Add the product ID to the cart array
+      localStorage.setItem("productsInCart", JSON.stringify(productsInCart)); // Save the updated cart array back to localStorage
+      localStorage.setItem("cart", JSON.stringify(productsInCart));
+      window.location.href = "../basket.html";
+    }
+
   </script>
   <script src="../navbar.js"></script>
+
 </body>
 
 </html>
