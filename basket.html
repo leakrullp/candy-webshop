@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basket</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="../Products/products.js"></script>
 
 </head>
 <body>
@@ -13,23 +12,24 @@
   <h1 id="basket-page-title">YOUR CART</h1>
   <div id="basket-container"></div>
   
-  <script>
+  <script type="module">
+    import { candyProducts } from "./Products/products.js";
     var basket = document.getElementById("basket-container");
 
     var productsInCart = JSON.parse(localStorage.getItem("productsInCart")) || []; // Retrieve the cart array from localStorage or create an empty array if it doesn't exist
 
     productsInCart.forEach(function(pc) {
       candyProducts.forEach(function(p) {
-        if (pc == p.id) {
-          basket.innerHTML += '<div class="basket-item">' + '<h2>' + p.name + '</h2>' + '<img src="../Products/' + p.image + '" class="basket-img">' + '<p>Price: ' + p.price + '</p>' + '<button class="remove-btn" onclick="removeFromCart(' + p.id + ')">Remove</button>' + '</div>';
+        if (pc.id == p.id) {
+          basket.innerHTML += '<div class="basket-item">' + '<h2>' + p.name + '</h2>' + '<img src="' + p.image + '" class="basket-img">' + '<p>Price: ' + p.price + '</p>' + '<p>Quantity: <span class="quantity">' + pc.quantity + '</span></p>' + '<button class="remove-btn" onclick="removeFromCart(' + p.id + ')">Remove</button>' + '</div>';
         }
       })
     })
 
-    function removeFromCart(id) {
+    window.removeFromCart = function (id) {
       var productsInCart = JSON.parse(localStorage.getItem("productsInCart"))
       productsInCart = productsInCart.filter(function(item) {
-        return item !== id; // Remove the specified id from the cart array
+        return item.id !== id; // Remove the specified id from the cart array
       });
       localStorage.setItem("productsInCart", JSON.stringify(productsInCart)); // Save the updated cart array back to localStorage
       window.location.href = "basket.html"; // Refresh the page to update the cart display
@@ -37,6 +37,6 @@
 
 
 </script>
-  <script src="navbar.js"></script>
+  <script type="module" src="navbar.js"></script>
 </body>
 </html>

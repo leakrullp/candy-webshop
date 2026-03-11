@@ -1,3 +1,5 @@
+import { numberOfProductsInCart } from "./Products/cartUtils.js";
+
 var navbar = document.getElementById("navbar");
 
 const user = localStorage.getItem("fname")
@@ -12,5 +14,4 @@ navbar.innerHTML = `
   <a href="../basket.html"> Cart <span id="cart-count" class="cart-count">0</span> </a>
 `;
 
-const cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
-document.getElementById("cart-count").textContent = cart.length;
+document.getElementById("cart-count").textContent = numberOfProductsInCart();

@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Details</title>
-  <script src="products.js"></script>
   <link rel="stylesheet" href="../styles.css">
 
 </head>
@@ -27,9 +26,11 @@
     </div>
   </div>
 
-  <script>
+  <script type="module">
+    import { candyProducts } from "./products.js";
+    import { addToCart } from "./cartUtils.js";
+    
     var selectedProductId = parseInt(localStorage.getItem("selectedProductId")); // Retrieve the selected product ID from localStorage
-    var product = document.getElementById("full-container");
 
     candyProducts.forEach(function(p) {
       if (selectedProductId == p.id) {
@@ -43,15 +44,10 @@
       }
     })  
 
-    function addToCart() {
-      let productsInCart = JSON.parse(localStorage.getItem("productsInCart")) || []; // Call the existing cart array from localStorage or create an empty array if it doesn't exist
-      productsInCart.push(selectedProductId); // Add the product ID to the cart array
-      localStorage.setItem("productsInCart", JSON.stringify(productsInCart)); // Save the updated cart array back to localStorage
-      localStorage.setItem("cart", JSON.stringify(productsInCart));
-      window.location.href = "../basket.html";
+    window.addToCart = function() {
+      addToCart(selectedProductId);
     }
-    
   </script>
-  <script src="../navbar.js"></script>
+  <script type="module" src="../navbar.js"></script>
 </body>
 </html>
