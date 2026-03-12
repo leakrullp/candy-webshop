@@ -1,5 +1,3 @@
-import { createProductCard } from "./productCard.js";
-
 export const candyProducts = [
   {
     id: 1,
@@ -233,26 +231,3 @@ export const candyProducts = [
     dateAdded: "2023-12-22",
   },
 ];
-
-export function filterProducts(products, filterFn) {
-  return products.filter(filterFn);
-}
-
-export function renderProductGrid(containerId, products) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = "";
-
-  products.forEach((product) => {
-    const card = createProductCard(product);
-    container.appendChild(card);
-  });
-
-  // Add event listeners for "View Details" buttons
-  container.querySelectorAll(".view-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const id = btn.dataset.id;
-      localStorage.setItem("selectedProductId", id);
-      window.location.href = "productDetails.html";
-    });
-  });
-}

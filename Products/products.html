@@ -70,10 +70,12 @@
   </main>
 
   <script type="module">
-    import { createProductCard } from "./productCard.js";
-    import { candyProducts, renderProductGrid } from "./products.js";
+    import { setupFilterListeners, applyFiltersAndRender } from "./productFilterUtil.js";
 
-    renderProductGrid("products-container", candyProducts);
+    document.addEventListener("DOMContentLoaded", () => {
+      setupFilterListeners();
+      applyFiltersAndRender();
+    });
 
     function viewProducts(id) {
       localStorage.setItem("selectedProductId", id); // Store the selected product ID in localStorage
