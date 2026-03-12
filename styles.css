@@ -21,7 +21,6 @@ body {
   line-height: 1.6;
 }
 
-/* Cart counter */
 .cart-link {
   position: relative;
 }
@@ -34,7 +33,8 @@ body {
   border-radius: 50%;
   margin-left: 5px;
 }
-/* Main carousel container */
+
+/* Carousel */
 .carousel {
   max-width: auto;
   margin: 20px auto;
@@ -42,7 +42,6 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Background and centering */
 .carousel-inner {
   background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
   height: 200px;
@@ -50,7 +49,6 @@ body {
   align-items: center;
 }
 
-/* Image sizing and effects */
 .carousel-item img {
   width: auto;
   height: 160px;
@@ -58,12 +56,10 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Hover scale effect */
 .carousel-item img:hover {
   transform: scale(1.1);
 }
 
-/* Make arrows visible on light background */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter: invert(1);
@@ -112,7 +108,6 @@ body {
   gap: 4rem;
 }
 
-/* Image */
 .product-card img,
 #product-image {
   width: 100%;
@@ -121,7 +116,6 @@ body {
   border-radius: 14px;
 }
 
-/* Product card */
 .product-card {
   background: var(--white);
   padding: 2.5rem 2rem;
@@ -199,6 +193,7 @@ body {
   font-size: 1.6rem;
   font-weight: 700;
 }
+
 #product-price {
   color: var(--beige);
   font-weight: 600;
@@ -214,6 +209,7 @@ body {
   cursor: pointer;
 }
 
+/* Product banners */
 .product-banner {
   position: relative;
   margin: 3rem auto;
@@ -251,11 +247,7 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 10;
-}
-
-.banner-arrow:hover {
-  transform: translateY(-50%) scale(1.1);
+  z-index: 1;
 }
 
 .banner-arrow.left {
@@ -265,8 +257,8 @@ body {
 .banner-arrow.right {
   right: -20px;
 }
-/* Basket Page */
 
+/* Basket Page */
 #basket-page-title {
   text-align: center;
   margin: 4rem 0 2rem;
@@ -365,7 +357,6 @@ body {
   background-color: #777 !important;
 }
 
-#banner-1 .product-banner-title{
+#banner-1 .product-banner-title {
   color: #e3c439;
-  
 }
