@@ -352,6 +352,10 @@ body {
 #welcome-header {
   color: #b8a25f !important;
 }
+#cart-header {
+  color: #b8a25f !important;
+  font-size: 36px;
+}
 
 .btn-primary {
   background-color: #b8a25f !important;
