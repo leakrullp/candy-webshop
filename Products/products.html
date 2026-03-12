@@ -5,12 +5,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdn.lineicons.com/5.1/line/lineicons.css" />
   <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
   <div id="navbar"></div>
-  <div id="products-container"></div>
+
+  <main class="container mt-5">
+
+    <section class="mt-5 p-4 bg-white border rounded shadow-sm">
+      <h3 class="mb-4">Filters</h3>
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <label class="form-label fw-bold">Countries</label>
+          <div id="countryFilters">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Denmark" id="checkDenmark">
+              <label class="form-check-label" for="checkDenmark">Denmark</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Poland" id="checkPoland">
+              <label class="form-check-label" for="checkPoland">Poland</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Greece" id="checkGreece">
+              <label class="form-check-label" for="checkGreece">Greece</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Serbia" id="checkSerbia">
+              <label class="form-check-label" for="checkSerbia">Serbia</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <label class="form-label fw-bold">Categories</label>
+          <div id="categoryFilters">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Gummies" id="checkGummies">
+              <label class="form-check-label" for="checkGummies">Gummies</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Chocolate" id="checkChocolate">
+              <label class="form-check-label" for="checkChocolate">Chocolate</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Licorice" id="checkLicorice">
+              <label class="form-check-label" for="checkLicorice">Licorice</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Bars and biscuits" id="checkBars">
+              <label class="form-check-label" for="checkBars">Bars and biscuits</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="products-container"></div>
+
+  </main>
 
   <script type="module">
     import { createProductCard } from "./productCard.js";
