@@ -19,7 +19,6 @@ function renderProductGrid(containerId, products, filter = () => true) {
     container.appendChild(card);
   });
 
-  // Add event listeners for "View Details" buttons
   container.querySelectorAll(".view-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
@@ -48,11 +47,9 @@ export function applyFiltersAndRender() {
   );
 }
 
-// attaching the event listeners
 export function setupFilterListeners() {
   const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
   allCheckboxes.forEach((cb) => {
-    // When a box is clicked, run the "Action"
     cb.addEventListener("change", applyFiltersAndRender);
   });
 }
