@@ -5,7 +5,9 @@ export function createProductCard(p) {
   card.innerHTML = `
     <h2>${p.name}</h2>
     <img src="${p.image}" width="200" alt="${p.name}" />
-    <p>Price: ${p.price} kr.</p>
+    <p>Pris: 
+    ${p.discount > 0 ? `<del>${p.price} kr.</del>` : `${p.price} kr.`}</p>
+    ${p.discount > 0 ?`<p style="background-color:#ffff00">Discounted price ${p.price -(p.discount/100 * p.price)} </p>` : ""}
     <p>Country: ${p.country}</p>
     <p>Brand: ${p.brand}</p>
     <button class="view-btn" data-id="${p.id}">View Details</button>

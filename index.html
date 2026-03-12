@@ -86,6 +86,7 @@
         </section>
         <div id="banner-1"></div>
         <div id="banner-2"></div>
+        <div id="banner-3"></div>
     </main>
 
     <script type="module" src="../navbar.js"></script>
@@ -97,10 +98,14 @@
         import { candyProducts } from "./Products/products.js";
         import { ProductBanner } from "./Products/productBanner.js";
 
-        ProductBanner("banner-1", "Danish products", candyProducts,
+        ProductBanner("banner-1", "On sale", candyProducts,
+            p => p.discount > 0 
+        );
+
+        ProductBanner("banner-2", "Danish products", candyProducts,
             p => p.country === "Denmark"
         );
-        ProductBanner("banner-2", "All products (no filter)", candyProducts,
+        ProductBanner("banner-3", "All products (no filter)", candyProducts,
             // p => p.country === "Denmark"
         );
 
