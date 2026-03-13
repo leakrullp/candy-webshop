@@ -1,4 +1,4 @@
-export const candyProducts = [
+const products = [
   {
     id: 1,
     price: 25.5,
@@ -217,7 +217,7 @@ export const candyProducts = [
   },
   {
     id: 15,
-    price: 26.0,
+    originalPrice: 26.0,
     name: "Dark Chocolate with Almonds",
     image: "/Products/images/15.jpg",
     country: "Greece",
@@ -231,3 +231,15 @@ export const candyProducts = [
     dateAdded: "2023-12-22",
   },
 ];
+
+function returnDiscountedPrice(p) {
+  const op = p.originalPrice;
+  const discount = p.discount;
+  if (discount > 0) return op - op * (discount / 100);
+  else return op;
+}
+
+export const candyProducts = products.map((p) => ({
+  ...p,
+  price: returnDiscountedPrice(p),
+}));
