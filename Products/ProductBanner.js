@@ -29,7 +29,6 @@ export function ProductBanner(bannerId, title, products, filter = () => true) {
 
   const track = banner.querySelector(".product-banner-track");
 
-  // Render all cards
   loopProducts.forEach((p) => {
     const card = createProductCard(p);
     card.style.minWidth = "260px";
@@ -37,7 +36,6 @@ export function ProductBanner(bannerId, title, products, filter = () => true) {
     track.appendChild(card);
   });
 
-  // Slider logic
   let index = selectedProducts.length; // middle block
   const cardWidth = 260 + 32; // card width + gap (2rem=32px)
 
@@ -50,7 +48,6 @@ export function ProductBanner(bannerId, title, products, filter = () => true) {
 
   updatePosition(false);
 
-  // Buttons
   banner.querySelector(".banner-arrow.left").addEventListener("click", () => {
     index--;
     updatePosition();
