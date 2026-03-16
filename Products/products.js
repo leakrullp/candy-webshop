@@ -1,7 +1,7 @@
-export const candyProducts = [
+const products = [
   {
     id: 1,
-    price: 25.5,
+    originalPrice: 25.5,
     name: "Frugt Vingummibamser",
     image: "/Products/images/1.jpg",
     country: "Germany",
@@ -17,7 +17,7 @@ export const candyProducts = [
   },
   {
     id: 2,
-    price: 45.0,
+    originalPrice: 45.0,
     name: "Cremet Mælkechokolade",
     image: "/Products/images/2.jpg",
     country: "Switzerland",
@@ -33,7 +33,7 @@ export const candyProducts = [
   },
   {
     id: 3,
-    price: 18.0,
+    originalPrice: 18.0,
     name: "Sure Jordbær Snører",
     image: "/Products/images/3.jpg",
     country: "Denmark",
@@ -49,7 +49,7 @@ export const candyProducts = [
   },
   {
     id: 4,
-    price: 32.0,
+    originalPrice: 32.0,
     name: "Salte Heksehyl",
     image: "/Products/images/4.jpg",
     country: "Netherlands",
@@ -65,7 +65,7 @@ export const candyProducts = [
   },
   {
     id: 5,
-    price: 15.0,
+    originalPrice: 15.0,
     name: "Klassiske Bolcher",
     image: "/Products/images/5.jpg",
     country: "Denmark",
@@ -81,7 +81,7 @@ export const candyProducts = [
   },
   {
     id: 6,
-    price: 20.0,
+    originalPrice: 20.0,
     name: "Polish Chocolate Wafer Bar",
     image: "/Products/images/6.png",
     country: "Poland",
@@ -97,7 +97,7 @@ export const candyProducts = [
   },
   {
     id: 7,
-    price: 17.5,
+    originalPrice: 17.5,
     name: "Plum Filled Chocolates",
     image: "/Products/images/7.png",
     country: "Poland",
@@ -112,7 +112,7 @@ export const candyProducts = [
   },
   {
     id: 8,
-    price: 14.0,
+    originalPrice: 14.0,
     name: "Polish Fruit Jellies",
     image: "/Products/images/8.jpg",
     country: "Poland",
@@ -127,7 +127,7 @@ export const candyProducts = [
   },
   {
     id: 9,
-    price: 22.0,
+    originalPrice: 22.0,
     name: "Serbian Hazelnut Chocolate",
     image: "/Products/images/9.jpg",
     country: "Serbia",
@@ -142,7 +142,7 @@ export const candyProducts = [
   },
   {
     id: 10,
-    price: 16.5,
+    originalPrice: 16.5,
     name: "Fruit Caramel Chews",
     image: "/Products/images/10.jpg",
     country: "Serbia",
@@ -157,7 +157,7 @@ export const candyProducts = [
   },
   {
     id: 11,
-    price: 19.0,
+    originalPrice: 19.0,
     name: "Serbian Cocoa Biscuits",
     image: "/Products/images/11.jpg",
     country: "Serbia",
@@ -172,7 +172,7 @@ export const candyProducts = [
   },
   {
     id: 12,
-    price: 24.0,
+    originalPrice: 24.0,
     name: "Greek Honey Sesame Bars",
     image: "/Products/images/12.jpg",
     country: "Greece",
@@ -187,7 +187,7 @@ export const candyProducts = [
   },
   {
     id: 13,
-    price: 21.0,
+    originalPrice: 21.0,
     name: "Greek Milk Chocolate Bar",
     image: "/Products/images/13.jpg",
     country: "Greece",
@@ -202,7 +202,7 @@ export const candyProducts = [
   },
   {
     id: 14,
-    price: 18.5,
+    originalPrice: 18.5,
     name: "Loukoumi (Greek Delight)",
     image: "/Products/images/14.jpg",
     country: "Greece",
@@ -217,7 +217,7 @@ export const candyProducts = [
   },
   {
     id: 15,
-    price: 26.0,
+    originalPrice: 26.0,
     name: "Dark Chocolate with Almonds",
     image: "/Products/images/15.jpg",
     country: "Greece",
@@ -231,3 +231,16 @@ export const candyProducts = [
     dateAdded: "2023-12-22",
   },
 ];
+
+function getCurrentPrice(p) {
+  const op = p.originalPrice;
+  const discount = p.discount;
+  let finalPrice = op;
+  if (discount > 0) finalPrice = op - op * (discount / 100);
+  return finalPrice;
+}
+
+export const candyProducts = products.map((p) => ({
+  ...p,
+  price: getCurrentPrice(p),
+}));
