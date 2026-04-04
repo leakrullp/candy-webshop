@@ -161,7 +161,7 @@ app.post('/baskets/:customerId', async (req, res) => {
   res.json({ message: 'Basket already exists', basket: baskets[customerId] });
 });
 
-// Get customer's basket
+// Get customer's basket - Kasper and Lea you can use it or delete it, to this I also made some changes in basket.html
 app.get('/baskets/:customerId', async (req, res) => {
   const { customerId } = req.params;
   const baskets = await getBaskets();
@@ -172,7 +172,7 @@ app.get('/baskets/:customerId', async (req, res) => {
   res.json(basket);
 });
 
-// Add item to customer's basket - added here but didn't add anywhere else in the code 
+// Add item to customer's basket - added here but didn't add anywhere else in the code - Kasper and Lea you can use it or delete it
 app.post('/baskets/:customerId/items', async (req, res) => {
   const { customerId } = req.params;
   const { productId, quantity } = req.body;
