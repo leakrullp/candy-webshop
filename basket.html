@@ -27,40 +27,59 @@
       var basketContainer = document.getElementById("basket-container");
       var sumDiv = document.getElementById("cart-sum");
 
-      var productsInCart = JSON.parse(localStorage.getItem("productsInCart")) || []; // Retrieve the cart array from localStorage or create an empty array if it doesn't exist
+      async function loadBasket() {
+        const customerId = localStorage.getItem("customerId");
+        if (!customerId) {
+          basketContainer.innerHTML = "<p>Please log in to view your basket.</p>";
+          return;
+        }
 
-      const sum = productsInCart.reduce((acc, pc) => {
-        const product = candyProducts.find(p => p.id == pc.id);
-        return acc + (product.price * pc.quantity);
-      }, 0);
-      sumDiv.innerHTML = `Sum: ${sum.toFixed(2)} kr`;
-
-      productsInCart.forEach(function (pc) {
-        candyProducts.forEach(function (p) {
-          if (pc.id == p.id) {
-            basketContainer.innerHTML += `
-        <div class="basket-item">
-          <h2>${p.name}</h2>
-          <img src="${p.image}" class="basket-img">
-          <p>Price: ${p.price.toFixed(2)}</p>
-          <p>Quantity: <span class="quantity">${pc.quantity}</span></p>
-          <button class="remove-btn" onclick="removeFromCart(${p.id})">Remove</button>
-        </div>
-      `;
+        try {
+          const response = await fetch(`/baskets/${customerId}`);
+          if (!response.ok) {
+            basketContainer.innerHTML = "<p>No basket found.</p>";
+            return;
           }
-        })
-      })
 
-      window.removeFromCart = function (id) {
-        var productsInCart = JSON.parse(localStorage.getItem("productsInCart"))
-        productsInCart = productsInCart.filter(function (item) {
-          return item.id !== id; // Remove the specified id from the cart array
-        });
-        localStorage.setItem("productsInCart", JSON.stringify(productsInCart)); // Save the updated cart array back to localStorage
-        window.location.href = "basket.html"; // Refresh the page to update the cart display
+          const basket = await response.json();
+          let sum = 0;
+
+          basket.items.forEach((item) => {
+            const product = candyProducts.find(p => p.id === item.productId);
+            if (!product) return;
+
+            sum += product.price * item.quantity;
+
+            basketContainer.innerHTML += `
+              <div class="basket-item">
+                <h2>${product.name}</h2>
+                <img src="${product.image}" class="basket-img" />
+                <p>Price: ${product.price.toFixed(2)} kr</p>
+                <p>Quantity: ${item.quantity}</p>
+                <button onclick="removeFromCart(${product.id})">Remove</button>
+              </div>
+            `;
+          });
+
+          sumDiv.innerHTML = `Sum: ${sum.toFixed(2)} kr`;
+        } catch (err) {
+          console.error('Load basket error:', err);
+          basketContainer.innerHTML = "<p>Failed to load basket.</p>";
+        }
       }
 
+      window.removeFromCart = async function (id) {
+        const customerId = localStorage.getItem("customerId");
+        try {
+          await fetch(`/baskets/${customerId}/items/${id}`, { method: "DELETE" });
+          loadBasket(); // Reload basket after removal
+        } catch (err) {
+          console.error('Remove from cart error:', err);
+          alert("Failed to remove item. Please try again.");
+        }
+      };
 
+      loadBasket();
     </script>
     <script type="module" src="navbar.js"></script>
     <script src="./messageHandler.js"></script>
