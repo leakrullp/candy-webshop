@@ -47,7 +47,7 @@ app.get("/api/baskets/:customerId", (req, res) => {
     const basket = data.baskets.find((b) => b.customerId === req.params.customerId);
   
     if (!basket) {
-      return res.status(404).json({ message: "Ingen kurv fundet for denne bruger" });
+      return res.status(404).json({ message: "No basket for this customer" });
     }
   
     res.json({ basket });
