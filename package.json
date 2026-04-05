@@ -2,9 +2,11 @@
   "name": "candy-webshop",
   "version": "1.0.0",
   "description": "",
-  "main": "coolStuff.js",
+  "main": "messageHandler.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -13,12 +15,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/leakrullp/candy-webshop/issues"
   },
   "homepage": "https://github.com/leakrullp/candy-webshop#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "uuid": "^13.0.0"
   }
 }
