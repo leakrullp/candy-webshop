@@ -48,7 +48,7 @@
                 return;
             }
 
-            fetch('/customers', {
+            fetch('/api/customers', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ firstName: fname, lastName: lname })

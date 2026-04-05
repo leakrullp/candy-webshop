@@ -35,7 +35,7 @@
         }
 
         try {
-          const response = await fetch(`/baskets/${customerId}`);
+          const response = await fetch(`/api/baskets/${customerId}`);
           if (!response.ok) {
             basketContainer.innerHTML = "<p>No basket found.</p>";
             return;
@@ -71,7 +71,7 @@
       window.removeFromCart = async function (id) {
         const customerId = localStorage.getItem("customerId");
         try {
-          await fetch(`/baskets/${customerId}/items/${id}`, { method: "DELETE" });
+          await fetch(`/api/baskets/${customerId}/items/${id}`, { method: "DELETE" });
           loadBasket(); // Reload basket after removal
         } catch (err) {
           console.error('Remove from cart error:', err);

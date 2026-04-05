@@ -21,9 +21,8 @@ app.get('/', (req, res) => {
 // Middleware setup
 app.use(express.json()); // Parse JSON request bodies
 const publicPath = path.join(__dirname); //Path to static files
-app.use(express.static(publicPath)); // Serve static files from the public directory
 const dataPath = path.join(__dirname, "data.json");
-
+app.use(express.static(publicPath)); // Serve static files from the public directory
 
 // HELPER FUNCTIONS
 
@@ -119,7 +118,7 @@ app.post('/api/customers', (req, res) => {
   let customerId = createCustomerId(firstName, lastName);
   let suffix = 1;
   while (data.customers.find(c => c.id === customerId)) {
-    customerId = `${customerId}-${suffix++}`; // Ensure unique ID
+    customerId = `${createCustomerId(firstName, lastName)}-${suffix++}`;
   }
 
   const newCustomer = {
@@ -140,6 +139,12 @@ app.post('/api/customers', (req, res) => {
 app.post('/api/customers/login', (req, res) => {
   const { firstName, lastName } = req.body;
   const data = getData();
+
+  // Reject empty login input
+  if (!firstName || !lastName) {
+    return res.status(400).json({ message: 'firstName and lastName are required' });
+  }
+
   const customer = data.customers.find(c => normalizeName(c.firstName) === normalizeName(firstName) && normalizeName(c.lastName) === normalizeName(lastName));
 
   if (!customer) {
