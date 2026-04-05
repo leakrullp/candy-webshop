@@ -5,10 +5,7 @@ const app = express();
 const PORT = 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}\n
-  See all products on http://localhost:${PORT}/api/categories\n
-  See all products with current price on http://localhost:${PORT}/api/products\n
-  See basket for a specific customer on http://localhost:${PORT}/api/baskets/1`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 }); 
 
 // Health check endpoint
