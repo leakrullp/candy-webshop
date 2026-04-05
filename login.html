@@ -50,7 +50,7 @@
             }
 
             // Try to login with existing customer
-            fetch('/customers/login', {
+            fetch('/api/customers/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ firstName: fname, lastName: lname })
