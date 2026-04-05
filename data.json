@@ -331,6 +331,23 @@
           "quantity": 1
         }
       ]
+    },
+    {
+      "customerId": "test-testt",
+      "items": [
+        {
+          "productId": 2,
+          "quantity": 2
+        },
+        {
+          "productId": 5,
+          "quantity": 2
+        },
+        {
+          "productId": 9,
+          "quantity": 1
+        }
+      ]
     }
   ]
 }

@@ -1,19 +1,25 @@
-export function addToCart(productId) {
-  let productsInCart = JSON.parse(localStorage.getItem("productsInCart")) || [];
-  
-  // Check if product already exists in cart
-  const existingProduct = productsInCart.find(item => item.id === productId);
-  
-  if (existingProduct) {
-    // Increase quantity if it already exists
-    existingProduct.quantity += 1;
-  } else {
-    // Add new product with quantity 1
-    productsInCart.push({id: productId, quantity: 1});
+export async function addToCart(productId) {
+  const customerId = localStorage.getItem("customerId");
+
+  if (!customerId) {
+    alert("Please log in before adding products to the cart.");
+    window.location.href = "../login.html";
+    return;
   }
-  
-  localStorage.setItem("productsInCart", JSON.stringify(productsInCart));
-  localStorage.setItem("cart", JSON.stringify(productsInCart));
+
+  const response = await fetch(`/api/baskets/${customerId}/items`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ productId, quantity: 1 }),
+  });
+
+  if (!response.ok) {
+    alert("Failed to add item to cart.");
+    return;
+  }
+
+  const data = await response.json();
+  localStorage.setItem("productsInCart", JSON.stringify(data.basket.items));
   window.location.href = "../basket.html";
 }
 
