@@ -41,9 +41,7 @@
             return;
           }
 
-          basketContainer.innerHTML = "";
-          const data = await response.json();
-          const basket = data.basket;
+          const basket = await response.json();
           let sum = 0;
 
           basket.items.forEach((item) => {

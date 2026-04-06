@@ -197,18 +197,13 @@ app.get("/api/baskets/:customerId", (req, res) => {
 
 // Add item to basket
 app.post('/api/baskets/:customerId/items', (req, res) => {
-  const { productId } = req.body;
-  const quantity = Number(req.body.quantity) || 1;
+  const { productId, quantity } = req.body;
   const data = getData();
 
-  let basket = data.baskets.find(b => b.customerId === req.params.customerId);
+  const basket = data.baskets.find(b => b.customerId === req.params.customerId);
 
   if (!basket) {
-    basket = {
-      customerId: req.params.customerId,
-      items: []
-    };
-    data.baskets.push(basket);
+    return res.status(404).json({ message: 'Basket not found' });
   }
 
   const item = basket.items.find(i => i.productId === productId);
