@@ -3,46 +3,21 @@ const path = require('path');
 const fs = require('fs');
 const app = express();
 const PORT = 3000;
+app.use(express.json()); // Parse JSON request bodies
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 }); 
 
-// Health check endpoint
-app.get('/status', (req, res) => {
-  res.send('Server is running');
-});
-
-// Root endpoint to serve the main HTML page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
-});
-
-// Middleware setup
-app.use(express.json()); // Parse JSON request bodies
-const publicPath = path.join(__dirname); //Path to static files
 const dataPath = path.join(__dirname, "data.json");
-app.use(express.static(publicPath)); // Serve static files from the public directory
 
 // HELPER FUNCTIONS
 
 // Read ALL data from JSON file
-const getData = () => {
-  return JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-};
+const getData = () => {return JSON.parse(fs.readFileSync(dataPath, 'utf8'));};
 
 // Write data to JSON file
-const saveData = (data) => {
-  fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-};
-
-// Normalize names for consistent matching
-const normalizeName = (value) => value.trim().toLowerCase();
-
-// Create unique customer ID from first and last name
-const createCustomerId = (firstName, lastName) => {
-  return `${normalizeName(firstName)}-${normalizeName(lastName)}`;
-};
+const saveData = (data) => {fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));};
 
 // Get products with the current price after applying discount
 function getCurrentPrice(product) {
@@ -56,7 +31,7 @@ function getCurrentPrice(product) {
 
 //PRODUCTS
 
-// GET all products with current price
+// GET all products
 app.get("/api/products", (req, res) => {
   const data = getData();
 
@@ -65,7 +40,7 @@ app.get("/api/products", (req, res) => {
     price: getCurrentPrice(p),
   }));
 
-  res.json({ products: productsWithPrice });
+  res.status(200).json({ products: productsWithPrice });
 });
 
 
@@ -76,7 +51,7 @@ app.get('/api/products/:id', (req, res) => {
   const product = data.products.find(p => p.id === parseInt(req.params.id));
 
   if (product) {
-    res.json(product);
+    res.status(200).json(product);
   } else {
     res.status(404).json({ message: 'Product not found' });
   }
@@ -88,7 +63,7 @@ app.get("/api/categories", (req, res) => {
   const data = getData();
 
   const categories = [...new Set(data.products.map((p) => p.category))];
-  res.json({ categories });
+  res.status(200).json({ categories });
 });
 
 
@@ -99,61 +74,12 @@ app.get("/api/categories/:category", (req, res) => {
   const products = data.products.filter(
     (p) => p.category.toLowerCase() === req.params.category.toLowerCase()
   );
+  if (products.length === 0) {
+    return res.status(404).json({ message: 'No products found in this category' });
+  }
 
-  res.json({ products });
+  res.status(200).json({ products });
 });
-
-
-//CUSTOMERS
-
-// Create a new customer
-app.post('/api/customers', (req, res) => {
-  const { firstName, lastName } = req.body;
-  const data = getData();
-
-  if (!firstName || !lastName) {
-    return res.status(400).json({ message: 'firstName and lastName are required' });
-  }
-
-  let customerId = createCustomerId(firstName, lastName);
-  let suffix = 1;
-  while (data.customers.find(c => c.id === customerId)) {
-    customerId = `${createCustomerId(firstName, lastName)}-${suffix++}`;
-  }
-
-  const newCustomer = {
-    id: customerId,
-    firstName: firstName.trim(),
-    lastName: lastName.trim(),
-    createdAt: new Date().toISOString(),
-  };
-
-  data.customers.push(newCustomer);
-  saveData(data);
-
-  res.status(201).json({ message: 'Customer created', customer: newCustomer });
-});
-
-
-// Login 
-app.post('/api/customers/login', (req, res) => {
-  const { firstName, lastName } = req.body;
-  const data = getData();
-
-  // Reject empty login input
-  if (!firstName || !lastName) {
-    return res.status(400).json({ message: 'firstName and lastName are required' });
-  }
-
-  const customer = data.customers.find(c => normalizeName(c.firstName) === normalizeName(firstName) && normalizeName(c.lastName) === normalizeName(lastName));
-
-  if (!customer) {
-    return res.status(400).json({ message: 'Customer not found' });
-  }
-
-  res.json({ customer });
-});
-
 
 // BASKETS
 
@@ -166,7 +92,7 @@ app.post('/api/baskets/:customerId',(req, res) => {
   );
 
   if (existing) {
-    return res.json({ message: "Basket already exists", basket: existing });
+    return res.status(200).json({ message: "Basket already exists", basket: existing });
   }
 
   const newBasket = {
@@ -191,7 +117,7 @@ app.get("/api/baskets/:customerId", (req, res) => {
       return res.status(404).json({ message: "No basket for this customer" });
     }
 
-    res.json({ basket });
+    res.status(200).json({ basket });
   });
 
 
@@ -215,7 +141,7 @@ app.post('/api/baskets/:customerId/items', (req, res) => {
   }
 
   saveData(data);
-  res.json({ message: 'Item added to basket', basket });
+  res.status(200).json({ message: 'Item added to basket', basket });
 });
 
 
@@ -232,19 +158,4 @@ app.delete('/api/baskets/:customerId/items/:productId', (req, res) => {
   basket.items = basket.items.filter(item => item.productId !== parseInt(req.params.productId));
   saveData(data);
   res.json({ message: 'Item removed from basket', basket });
-});
-
-
-// Clear entire basket for customer
-app.delete('/api/baskets/:customerId', (req, res) => {
-  const data = getData();
-
-  const basket = data.baskets.find(b => b.customerId === req.params.customerId);
-
-  if (!basket) {
-    return res.status(404).json({ message: 'Basket not found' });
-  }
-  basket.items = [];
-  saveData(data);
-  res.json({ message: 'Basket cleared', basket });
 });
