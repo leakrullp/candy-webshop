@@ -157,5 +157,5 @@ app.delete('/api/baskets/:customerId/items/:productId', (req, res) => {
 
   basket.items = basket.items.filter(item => item.productId !== parseInt(req.params.productId));
   saveData(data);
-  res.json({ message: 'Item removed from basket', basket });
+  res.status(200).json({ message: 'Item removed from basket', basket });
 });
