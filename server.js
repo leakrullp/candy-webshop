@@ -51,7 +51,7 @@ app.get('/api/products/:id', (req, res) => {
   const product = data.products.find(p => p.id === parseInt(req.params.id));
 
   if (product) {
-    res.status(200).json(product);
+    res.status(200).json({...product, price: getCurrentPrice(product)});
   } else {
     res.status(404).json({ message: 'Product not found' });
   }
@@ -73,7 +73,7 @@ app.get("/api/categories/:category", (req, res) => {
 
   const products = data.products.filter(
     (p) => p.category.toLowerCase() === req.params.category.toLowerCase()
-  );
+  ).map((p) => ({ ...p, price: getCurrentPrice(p) }));
   if (products.length === 0) {
     return res.status(404).json({ message: 'No products found in this category' });
   }
