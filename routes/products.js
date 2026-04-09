@@ -14,17 +14,6 @@ router.get("/", (req, res) => {
   res.status(200).json({ products: productsWithPrice });
 });
 
-// GET product by ID
-router.get("/:id", (req, res) => {
-  const product = data.products.find((p) => p.id === parseInt(req.params.id));
-
-  if (product) {
-    res.status(200).json({ ...product, price: getCurrentPrice(product) });
-  } else {
-    res.status(404).json({ message: "Product not found" });
-  }
-});
-
 // GET product categories
 router.get("/categories", (req, res) => {
   const categories = [...new Set(data.products.map((p) => p.category))];
@@ -43,8 +32,18 @@ router.get("/categories/:category", (req, res) => {
       .status(404)
       .json({ message: "No products found in this category" });
   }
-
   res.status(200).json({ products });
+});
+
+// GET product by ID
+router.get("/:id", (req, res) => {
+  const product = data.products.find((p) => p.id === parseInt(req.params.id));
+
+  if (product) {
+    res.status(200).json({ ...product, price: getCurrentPrice(product) });
+  } else {
+    res.status(404).json({ message: "Product not found" });
+  }
 });
 
 export default router;

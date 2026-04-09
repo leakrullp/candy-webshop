@@ -19,38 +19,38 @@
   </main>
   <div id="basket-container"></div>
   <h1 id="cart-sum">
-    </div>
+  </h1>
 
-    <script type="module">
-      import { candyProducts } from "./Products/products.js";
+  <script type="module">
+    import { candyProducts } from "./Products/products.js";
 
-      var basketContainer = document.getElementById("basket-container");
-      var sumDiv = document.getElementById("cart-sum");
+    var basketContainer = document.getElementById("basket-container");
+    var sumDiv = document.getElementById("cart-sum");
 
-      async function loadBasket() {
-        const customerId = localStorage.getItem("customerId");
-        if (!customerId) {
-          basketContainer.innerHTML = "<p>Please log in to view your basket.</p>";
+    async function loadBasket() {
+      const customerId = localStorage.getItem("customerId");
+      if (!customerId) {
+        basketContainer.innerHTML = "<p>Please log in to view your basket.</p>";
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/baskets/${customerId}`);
+        if (!response.ok) {
+          basketContainer.innerHTML = "<p>No basket found.</p>";
           return;
         }
 
-        try {
-          const response = await fetch(`/api/baskets/${customerId}`);
-          if (!response.ok) {
-            basketContainer.innerHTML = "<p>No basket found.</p>";
-            return;
-          }
+        const basket = await response.json();
+        let sum = 0;
 
-          const basket = await response.json();
-          let sum = 0;
+        basket.items.forEach((item) => {
+          const product = candyProducts.find(p => p.id === item.productId);
+          if (!product) return;
 
-          basket.items.forEach((item) => {
-            const product = candyProducts.find(p => p.id === item.productId);
-            if (!product) return;
+          sum += product.price * item.quantity;
 
-            sum += product.price * item.quantity;
-
-            basketContainer.innerHTML += `
+          basketContainer.innerHTML += `
               <div class="basket-item">
                 <h2>${product.name}</h2>
                 <img src="${product.image}" class="basket-img" />
@@ -59,30 +59,30 @@
                 <button onclick="removeFromCart(${product.id})">Remove</button>
               </div>
             `;
-          });
+        });
 
-          sumDiv.innerHTML = `Sum: ${sum.toFixed(2)} kr`;
-        } catch (err) {
-          console.error('Load basket error:', err);
-          basketContainer.innerHTML = "<p>Failed to load basket.</p>";
-        }
+        sumDiv.innerHTML = `Sum: ${sum.toFixed(2)} kr`;
+      } catch (err) {
+        console.error('Load basket error:', err);
+        basketContainer.innerHTML = "<p>Failed to load basket.</p>";
       }
+    }
 
-      window.removeFromCart = async function (id) {
-        const customerId = localStorage.getItem("customerId");
-        try {
-          await fetch(`/api/baskets/${customerId}/items/${id}`, { method: "DELETE" });
-          loadBasket(); // Reload basket after removal
-        } catch (err) {
-          console.error('Remove from cart error:', err);
-          alert("Failed to remove item. Please try again.");
-        }
-      };
+    window.removeFromCart = async function (id) {
+      const customerId = localStorage.getItem("customerId");
+      try {
+        await fetch(`/api/baskets/${customerId}/items/${id}`, { method: "DELETE" });
+        loadBasket(); // Reload basket after removal
+      } catch (err) {
+        console.error('Remove from cart error:', err);
+        alert("Failed to remove item. Please try again.");
+      }
+    };
 
-      loadBasket();
-    </script>
-    <script type="module" src="navbar.js"></script>
-    <script src="./messageHandler.js"></script>
+    loadBasket();
+  </script>
+  <script type="module" src="navbar.js"></script>
+  <script src="./messageHandler.js"></script>
 </body>
 
 </html>

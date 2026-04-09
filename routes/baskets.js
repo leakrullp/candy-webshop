@@ -41,8 +41,9 @@ router.get("/:customerId", (req, res) => {
 });
 
 // Add item to basket
-router.post("/:customerId/items", (req, res) => {
-  const { productId, quantity } = req.body;
+router.post("/:customerId/:productId/:quantity", (req, res) => {
+  const productId = parseInt(req.params.productId);
+  const quantity = parseInt(req.params.quantity);
 
   const basket = data.baskets.find(
     (b) => b.customerId === req.params.customerId,
@@ -65,7 +66,7 @@ router.post("/:customerId/items", (req, res) => {
 });
 
 // Remove item from basket
-router.delete("/:customerId/items/:productId", (req, res) => {
+router.delete("/:customerId/:productId", (req, res) => {
   const basket = data.baskets.find(
     (b) => b.customerId === req.params.customerId,
   );

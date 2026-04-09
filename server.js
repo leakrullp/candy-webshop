@@ -15,17 +15,17 @@ app.listen(PORT, () => {
   Server is running on http://localhost:${PORT}
 
   PRODUCTS
-  GET  all products:               http://localhost:${PORT}/products
-  GET  product by ID:              http://localhost:${PORT}/products/:id
+  GET  all products:               http://localhost:${PORT}/products 
+  GET  product by ID:              http://localhost:${PORT}/products/:id                              ex: http://localhost:${PORT}/products/1
 
   CATEGORIES
-  GET  all categories:             http://localhost:${PORT}/categories
-  GET  products by category:       http://localhost:${PORT}/categories/:category
+  GET  all categories:             http://localhost:${PORT}/products/categories
+  GET  products by category:       http://localhost:${PORT}/products/categories/:category             ex: http://localhost:${PORT}/products/categories/Gummies
 
   BASKETS
-  POST create basket for user:     http://localhost:${PORT}/baskets/:customerId
+  POST create basket for user:     http://localhost:${PORT}/baskets/:customerId                       ex: http://localhost:${PORT}/baskets/2
   GET  basket for user:            http://localhost:${PORT}/baskets/:customerId
-  POST add item to basket:         http://localhost:${PORT}/baskets/:customerId/items
-  DEL  remove item from basket:    http://localhost:${PORT}/baskets/:customerId/items/:productId
+  POST add item to basket:         http://localhost:${PORT}/baskets/:customerId/:productId/:quantity  ex: http://localhost:${PORT}/baskets/2/1/1
+  DEL  remove item from basket:    http://localhost:${PORT}/baskets/:customerId/:productId            ex: http://localhost:${PORT}/baskets/2/1
   `);
 });
