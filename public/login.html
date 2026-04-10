@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
-            <div class="container" id = "welcome-header" style="margin:5px">
+            <div class="container" id="welcome-header" style="margin:5px">
                 <h3>Please login to your account</h3>
                 <form action="index.html">
                     <label for="fname">First name:</label><br />
@@ -55,23 +55,23 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ firstName: fname, lastName: lname })
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.customer) {
-                    // Login successful
-                    localStorage.setItem("customerId", data.customer.id);
-                    localStorage.setItem("fname", fname);
-                    localStorage.setItem("lname", lname);
-                    window.location.href = "index.html";
-                } else {
-                    // Customer not found, redirect to register
-                    window.location.href = "register.html";
-                }
-            })
-            .catch(err => {
-                console.error('Login error:', err);
-                alert("Login failed. Please try again.");
-            });
+                .then(res => res.json())
+                .then(data => {
+                    if (data.customer) {
+                        // Login successful
+                        localStorage.setItem("customerId", data.customer.id);
+                        localStorage.setItem("fname", fname);
+                        localStorage.setItem("lname", lname);
+                        window.location.href = "index.html";
+                    } else {
+                        // Customer not found, redirect to register
+                        window.location.href = "register.html";
+                    }
+                })
+                .catch(err => {
+                    console.error('Login error:', err);
+                    alert("Login failed. Please try again.");
+                });
         }
         function checkIfUserExists() {
             const inputFname = document.getElementById("fname").value;
@@ -84,7 +84,7 @@
         }
     </script>
 
-    <script type="module" src="../navbar.js"></script>
+    <script type="module" src="./navbar.js"></script>
 </body>
 
 </html>
