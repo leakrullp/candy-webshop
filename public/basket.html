@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basket</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+  <div id="navbar"></div>
+  <main class="container mt-5">
+    <header class="text-center mb-5">
+      <h1 class="display-4 fw-bold" id="cart-header"></h1>
+    </header>
+  </main>
+  <div id="basket-container"></div>
+  <h1 id="cart-sum">
+  </h1>
+
+  <script type="module">
+    import { candyProducts } from "./Products/products.js";
+
+    var basketContainer = document.getElementById("basket-container");
+    var sumDiv = document.getElementById("cart-sum");
+
+    async function loadBasket() {
+      const customerId = localStorage.getItem("customerId");
+      if (!customerId) {
+        basketContainer.innerHTML = "<p>Please log in to view your basket.</p>";
+        return;
+      }
+
+      try {
+        const response = await fetch(`/baskets/${customerId}`);
+        if (!response.ok) {
+          basketContainer.innerHTML = "<p>No basket found.</p>";
+          return;
+        }
+
+        const basket = await response.json();
+        let sum = 0;
+
+        basket.items.forEach((item) => {
+          const product = candyProducts.find(p => p.id === item.productId);
+          if (!product) return;
+
+          sum += product.price * item.quantity;
+
+          basketContainer.innerHTML += `
+              <div class="basket-item">
+                <h2>${product.name}</h2>
+                <img src="${product.image}" class="basket-img" />
+                <p>Price: ${product.price.toFixed(2)} kr</p>
+                <p>Quantity: ${item.quantity}</p>
+                <button onclick="removeFromCart(${product.id})">Remove</button>
+              </div>
+            `;
+        });
+
+        sumDiv.innerHTML = `Sum: ${sum.toFixed(2)} kr`;
+      } catch (err) {
+        console.error('Load basket error:', err);
+        basketContainer.innerHTML = "<p>Failed to load basket.</p>";
+      }
+    }
+
+    window.removeFromCart = async function (productId) {
+      const customerId = localStorage.getItem("customerId");
+      try {
+        await fetch(`/baskets/${customerId}/${productId}`, { method: "DELETE" });
+        loadBasket(); // Reload basket after removal
+      } catch (err) {
+        console.error('Remove from cart error:', err);
+        alert("Failed to remove item. Please try again.");
+      }
+    };
+
+    loadBasket();
+  </script>
+  <script type="module" src="navbar.js"></script>
+  <script src="./messageHandler.js"></script>
+</body>
+
+</html>
