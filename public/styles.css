@@ -209,6 +209,13 @@ body {
   cursor: pointer;
 }
 
+#cart-sum {
+  color: red;
+  margin-bottom: 3rem;
+  text-decoration: underline;
+  text-align: center;
+}
+
 /* Product banners */
 .product-banner {
   position: relative;
